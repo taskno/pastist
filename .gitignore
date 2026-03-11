@@ -1,0 +1,8 @@
+/*.sln
+/*.pyproj
+__pycache__
+/.vs
+/results
+.ipynb_checkpoints/
+/python/
+!python/README.md

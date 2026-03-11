@@ -1,0 +1,49 @@
+preProcessing:
+  point_cloud: PCD_PATH
+  roof_cover_voxel_size: 0.05
+  view_positions:   
+  - -x
+  - +x
+  - +y
+  - -y
+  - +z
+  inner_point_sampling_size: 0.01
+  cover_inner_dist_thresh: 0.1
+
+Segmentation:
+ point_cloud: 01_inner_pcd.ply
+ max_angle: 5.
+ search_radius: 0.05
+ min_seg_size: 300
+ nr_neighbors: 30
+ segments_pcd: 02_segmented_pcd.ply
+ 
+splitSegments:
+ point_cloud: 02_segmented_pcd.ply
+ surface_variation: 0.0001
+ max_plane_dist: 0.025
+ min_seg_size: 300
+ linear_ratio: 0.8
+ split_segments_pcd: 02_split_segments_pcd.ply
+
+beamModeling:
+ point_cloud: 02_split_segments_pcd.ply
+ min_seg_size: 300
+ min_beam_width: 0.10
+ max_beam_width: 0.40
+ max_long_angle: 3.
+ max_norm_angle: 15.
+ beams_mesh: 03_beams_mesh.ply
+ beams_pcd: 03_beams_pcd.ply
+ 
+beamExporter:
+ mesh: 03_beams_mesh.ply
+ formats:
+ - dxf
+ - stp
+ joint_detection: true
+ max_joint_size: 0.20
+ cross_sections_as_inch: true
+ cluster_cross_sections: true
+ material: Nadelholz C24
+ out_file_name: 03_beams
